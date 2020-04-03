@@ -1,6 +1,27 @@
-class hexagon {
+class Hexagon {
   
-  float[] start_hexagon(int x, int y, int size) {
+  int x1 = 0;
+  int y1 = 0;
+  int size;
+  
+  void draw() {
+    start_hexagon()
+  }
+  
+  void set_coordinates(int x, int y){
+    this.x1 = x;
+    this.y1 = y;
+  }
+  
+  void get_size(Triangle parent) {
+    this.size = parent.length_sides;
+  }
+  
+  void set_size(int size) {
+    this.size = size;
+  }
+  
+  float[] start_hexagon() {
     float edges[] = new float[12];
     edges[0] = x;
     edges[1] = y;
@@ -24,6 +45,18 @@ class hexagon {
     line(edges[10], edges[11], edges[0], edges[1]);
     
     return edges;
+  }
+  
+  void draw_black_hex(float edges[]) {
+    stroke(255);
+    fill(255);
+    line(edges[0], edges[1], edges[2], edges[3]);
+    line(edges[2], edges[3], edges[4], edges[5]);
+    line(edges[4], edges[5], edges[6], edges[7]);
+    line(edges[6], edges[7], edges[8], edges[9]);
+    line(edges[8], edges[9], edges[10], edges[11]);
+    line(edges[10], edges[11], edges[0], edges[1]);
+    noFill();
   }
 
    void draw_inside_hex(float edges[], float distance, int counter) {

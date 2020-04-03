@@ -177,7 +177,7 @@ class Triangle {
     line(int(_x4), int(_y4), int(_x5), int(_y5));
     line(int(_x5), int(_y5), int(_x6), int(_y6));
     
-    if (gradient >= 255) gradient=0; else gradient=iterations*3;
+    if (gradient >= 255) gradient=0; else gradient=iterations*10;
     if (iterations < counter_iterations) {
       draw_inside(_x4, _y4, _x5, _y5, _x6, _y6);
     }
