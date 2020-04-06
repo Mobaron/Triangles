@@ -11,15 +11,21 @@ class Triangle {
     int counter_iterations;
     int iterations = 0;
     String orientation;
-
-  Triangle(String rotation) {
+    
+  /**
+   * Triangle Constructor.
+   * @param length_sides         Length of the triangle sides.
+   * @param counter_iterations   Counter of how many inside lines will be drawn.
+   * @param inside_distance      Distance between inside lines.
+   */
+  Triangle(int length_sides, int counter_iterations, float inside_distance, String rotation) {
     // rotation accepted parameters: top, left, right, bottom;
     this.x1 = 0;
     this.y1 = 0;
-    this.length_sides = size_triangle;
+    this.length_sides = length_sides;
     this.orientation = rotation;
-    this.inside_distance = distance_param;
-    this.counter_iterations = iteration_param;
+    this.inside_distance = inside_distance;
+    this.counter_iterations = counter_iterations;
   }
   
   void draw(){
@@ -182,6 +188,61 @@ class Triangle {
       draw_inside(_x4, _y4, _x5, _y5, _x6, _y6);
     }
   }
+  
+  /**
+   * Fill an Image with Triangles
+   * 
+   * @param  
+   * @param
+   * @return ArrayList
+   */
+  
+  void triangleFill(int counter) {
+    
+  ArrayList<Triangle> triangles = new ArrayList<Triangle>();
+  
+  int shift = int(-0.5 * size_triangle); //triangles will start out of frame to fill the whole screen
+  int rows = 0;
+  int l_y;
+  
+  while (counter < 300) {
+    
+    triangles.add(new Triangle(length_sides, counter_iterations, inside_distance, "bottom"));
+    Triangle c_triangle = triangles.get(counter); //current triangle
+    
+    if (counter == 0) { // First Element in ArrayList
+      c_triangle.set_coordinates(shift, 0); //first triangle starts out of frame to fill the whole screen
+      c_triangle.draw();
+      rows = rows + 1;
+    } else { // Other Elements
+      Triangle l_triangle = triangles.get(counter - 1); //last triangle
+      float x_coordinate = l_triangle.get_x2();
+      String l_orientation = l_triangle.get_orientation();
+      if (x_coordinate > window_x) { // If x2 coordinate of current triangle exeeds boundaries start a new row of triangles.
+        rows = rows + 1;
+        if (isEven(rows)){
+            shift = - size_triangle;
+          } else {
+            shift = int(-0.5 * size_triangle);
+          }
+        if (l_orientation == "top") {
+          l_y = int(l_triangle.get_y3());
+        } else {
+          l_y = int(l_triangle.get_y1());
+        }
+        c_triangle.set_coordinates(shift, int(l_y + (l_triangle.get_h()))); //next row start under last row and every even row is shifted by 1/2 size
+        c_triangle.draw();
+      } else { //continue current row
+        if (l_orientation == "bottom") {
+          c_triangle.set_orientation("top");
+        }
+        c_triangle.location(l_triangle, "right");
+        c_triangle.draw();
+      }
+    }
+    counter++;
+  }
+}
 }
 
 //Ideen: set_edges Funktion einbauen um nicht-gleichseitige Dreiecke zu realisieren
