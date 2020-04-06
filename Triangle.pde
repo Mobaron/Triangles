@@ -183,3 +183,6 @@ class Triangle {
     }
   }
 }
+
+//Ideen: set_edges Funktion einbauen um nicht-gleichseitige Dreiecke zu realisieren
+// mirror Funktion einbauen, damit auch mit gespiegelten Dreieicken gearbeitet werden kann

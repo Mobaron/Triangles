@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////
 int window_x = 2560;
 int gradient = 255;
-int size_triangle = 180;
+int size_triangle = 200;
 int iteration_param = 200;
 float distance_param = 0.08f;
 /////////////////////////////////////////////////////////////
@@ -27,8 +27,9 @@ public void draw() {
   
   hexagons.add(new Hexagon());
   Hexagon c_hexagon = hexagons.get(counter); //current triangle
-  c_hexagon.set_coordinates(shift, int(l_y + (l_triangle.get_h()))); 
-        c_triangle.draw();
+  c_hexagon.set_coordinates(2 * size_triangle, int(sin(radians(60)) * size_triangle)); 
+  c_hexagon.set_size(2 * size_triangle);
+        c_hexagon.draw();
   
   while (counter < 300) {
     

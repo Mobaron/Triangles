@@ -1,11 +1,13 @@
 class Hexagon {
   
-  int x1 = 0;
-  int y1 = 0;
-  int size;
+  int x1= 0;
+  int y1= 0;
+  int size= size_triangle;
+  float distance= distance_param;
   
   void draw() {
-    start_hexagon()
+    draw_black_hex();
+    draw_inside_hex(start_hex(), distance);
   }
   
   void set_coordinates(int x, int y){
@@ -21,20 +23,36 @@ class Hexagon {
     this.size = size;
   }
   
-  float[] start_hexagon() {
+  void draw_black_hex() {
+    float angle = TWO_PI / 6;
+    float radius = size;
+    float x = x1 + 0.5 * size;
+    float y = y1 + sin(radians(60)) * size;
+    fill(0);
+    beginShape();
+    for (float a = 0; a < TWO_PI; a += angle){
+      float sx = x + cos(a) * radius;
+      float sy = y + sin(a) * radius;
+      vertex(sx,sy);
+    }
+    endShape(CLOSE);
+    noFill();  
+  }
+  
+  float[] start_hex() {
     float edges[] = new float[12];
-    edges[0] = x;
-    edges[1] = y;
-    edges[2] = x + size;
-    edges[3] = y;
-    edges[4] = x + 1.5f * size;
-    edges[5] = y + sin(degrees(60)) * size;
-    edges[6] = x + size;
-    edges[7] = y + 2 * sin(degrees(60)) * size;
-    edges[8] = x;
-    edges[9] = y + 2 * sin(degrees(60)) * size;
-    edges[10] = x - 0.5f * size;
-    edges[11] = y + sin(degrees(60)) * size;
+    edges[0] = x1;
+    edges[1] = y1;
+    edges[2] = x1 + size;
+    edges[3] = y1;
+    edges[4] = x1 + 1.5f * size;
+    edges[5] = y1 + sin(radians(60)) * size;
+    edges[6] = x1 + size;
+    edges[7] = y1 + 2 * sin(radians(60)) * size;
+    edges[8] = x1;
+    edges[9] = y1 + 2 * sin(radians(60)) * size;
+    edges[10] = x1 - 0.5f * size;
+    edges[11] = y1 + sin(radians(60)) * size;
     
     stroke(gradient, 255, 255);
     line(edges[0], edges[1], edges[2], edges[3]);
@@ -47,19 +65,8 @@ class Hexagon {
     return edges;
   }
   
-  void draw_black_hex(float edges[]) {
-    stroke(255);
-    fill(255);
-    line(edges[0], edges[1], edges[2], edges[3]);
-    line(edges[2], edges[3], edges[4], edges[5]);
-    line(edges[4], edges[5], edges[6], edges[7]);
-    line(edges[6], edges[7], edges[8], edges[9]);
-    line(edges[8], edges[9], edges[10], edges[11]);
-    line(edges[10], edges[11], edges[0], edges[1]);
-    noFill();
-  }
 
-   void draw_inside_hex(float edges[], float distance, int counter) {
+   void draw_inside_hex(float edges[], float distance){//, int counter) {
     //iterations = iterations + 1;
     float new_edges[] = new float[12];
     new_edges[0] = edges[2] + (edges[4] - edges[2]) * distance;
