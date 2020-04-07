@@ -6,156 +6,165 @@ class Triangle {
     float y2;
     float x3;
     float y3;
-    float inside_distance;
-    int length_sides;
-    int counter_iterations;
+    float insideDistance;
+    int row;
+    int lengthSides;
+    int counterIterations;
     int iterations = 0;
     String orientation;
-    
+
   /**
    * Triangle Constructor.
    * @param length_sides         Length of the triangle sides.
    * @param counter_iterations   Counter of how many inside lines will be drawn.
    * @param inside_distance      Distance between inside lines.
    */
-  Triangle(int length_sides, int counter_iterations, float inside_distance, String rotation) {
+  Triangle(int lengthSides, int counterIterations, float insideDistance, String rotation) {
     // rotation accepted parameters: top, left, right, bottom;
     this.x1 = 0;
     this.y1 = 0;
-    this.length_sides = length_sides;
+    this.lengthSides = lengthSides;
     this.orientation = rotation;
-    this.inside_distance = inside_distance;
-    this.counter_iterations = counter_iterations;
+    this.insideDistance = insideDistance;
+    this.counterIterations = counterIterations;
   }
   
   void draw(){
-    start_triangle();
-    draw_inside(x1, y1, x2, y2, x3, y3);
+    startTriangle();
+    drawInside(x1, y1, x2, y2, x3, y3);
   }
   
   void location(Triangle parent, String position){
-    String parent_rotation = parent.get_orientation();
+    String parentRotation = parent.getOrientation();
     
-    if (parent_rotation == "bottom") {
+    if (parentRotation == "bottom") {
       if (orientation == "top") {
         if (position == "right"){
-          this.x1 = parent.get_x3();
-          this.y1 = parent.get_y3();
+          this.x1 = parent.getX3();
+          this.y1 = parent.getY3();
         } else if (position == "left"){
-          this.x1 = parent.get_x3() - this.length_sides;
-          this.y1 = parent.get_y3();
+          this.x1 = parent.getX3() - this.lengthSides;
+          this.y1 = parent.getY3();
         } else if (position == "top"){
-          this.x1 = parent.get_x1();
-          this.y1 = parent.get_y1();
+          this.x1 = parent.getX1();
+          this.y1 = parent.getY1();
         } else if (position == "bottom"){
-          this.x1 = parent.get_x1();
-          this.y1 = parent.get_y1() + parent.get_h() * 2;
+          this.x1 = parent.getX1();
+          this.y1 = parent.getY1() + parent.get_h() * 2;
         }
       }
     }
     
-    if (parent_rotation == "bottom") {
+    if (parentRotation == "bottom") {
       if (orientation == "bottom") {
         if (position == "right"){
-          this.x1 = parent.get_x2();
-          this.y1 = parent.get_y2();
+          this.x1 = parent.getX2();
+          this.y1 = parent.getY2();
         } else if (position == "left"){
-          this.x1 = parent.get_x1() - this.length_sides;
-          this.y1 = parent.get_y1();
+          this.x1 = parent.getX1() - this.lengthSides;
+          this.y1 = parent.getY1();
         } else if (position == "top"){
-          this.x1 = parent.get_x1();
-          this.y1 = parent.get_y1() - parent.get_h();
+          this.x1 = parent.getX1();
+          this.y1 = parent.getY1() - parent.get_h();
         } else if (position == "bottom"){
-          this.x1 = parent.get_x1();
-          this.y1 = parent.get_y1() + parent.get_h();
+          this.x1 = parent.getX1();
+          this.y1 = parent.getY1() + parent.get_h();
         }
       }
     }
 
-    if (parent_rotation == "top") {
+    if (parentRotation == "top") {
       if (orientation == "bottom") {
         if (position == "right"){
-          this.x1 = parent.get_x3();
-          this.y1 = parent.get_y3();
+          this.x1 = parent.getX3();
+          this.y1 = parent.getY3();
         } else if (position == "left"){
-          this.x1 = parent.get_x3() - this.length_sides;
-          this.y1 = parent.get_y3();
+          this.x1 = parent.getX3() - this.lengthSides;
+          this.y1 = parent.getY3();
         } else if (position == "top"){
-          this.x1 = parent.get_x1();
-          this.y1 = parent.get_y1() - parent.get_h() * 2;
+          this.x1 = parent.getX1();
+          this.y1 = parent.getY1() - parent.get_h() * 2;
         } else if (position == "bottom"){
-          this.x1 = parent.get_x1();
-          this.y1 = parent.get_y1();
+          this.x1 = parent.getX1();
+          this.y1 = parent.getY1();
         }
       }
     }
 
-    if (parent_rotation == "top") {
+    if (parentRotation == "top") {
       if (orientation == "top") {
         if (position == "right"){
-          this.x1 = parent.get_x2();
-          this.y1 = parent.get_y2();
+          this.x1 = parent.getX2();
+          this.y1 = parent.getY2();
         } else if (position == "left"){
-          this.x1 = parent.get_x1() - this.length_sides;
-          this.y1 = parent.get_y1();
+          this.x1 = parent.getX1() - this.lengthSides;
+          this.y1 = parent.getY1();
         } else if (position == "top"){
-          this.x1 = parent.get_x1();
-          this.y1 = parent.get_y1() - parent.get_h();
+          this.x1 = parent.getX1();
+          this.y1 = parent.getY1() - parent.get_h();
         } else if (position == "bottom"){
-          this.x1 = parent.get_x1();
-          this.y1 = parent.get_y1() + parent.get_h();
+          this.x1 = parent.getX1();
+          this.y1 = parent.getY1() + parent.get_h();
         }
       }
     }
   }
 
-  void set_coordinates(int x, int y) {
+  void setCoordinates(int x, int y) {
     this.x1 = x;
     this.y1 = y;
   }
   
-  void set_orientation(String ori) {
+  void setOrientation(String ori) {
     this.orientation = ori;
   }
+  
+  void setRow(int row) {
+    this.row = row;
+  }
 
-  float get_x1() {
+  float getX1() {
     return x1;
   }
   
-  float get_x2() {
+  float getX2() {
     return x2;
   }
   
-  float get_x3() {
+  float getX3() {
     return x3;
   }
   
-  float get_y1() {
+  float getY1() {
     return y1;
   }
   
-  float get_y2() {
+  float getY2() {
     return y2;
   }
   
-  float get_y3() {
+  float getY3() {
     return y3;
   }
   
-  String get_orientation() {
+  int getSize() {
+    return lengthSides;
+  }
+  
+  String getOrientation() {
     return orientation;
   }
   
-  void start_triangle() {
+  void startTriangle() {
     // Add left and right later.
     if (orientation == "top") {
-      y3 = y1 - sin(radians(60)) * length_sides;
+      y3 = y1 - sin(radians(60)) * lengthSides;
     } else if (orientation == "bottom") {
-      y3 = y1 + sin(radians(60)) * length_sides;
+      y3 = y1 + sin(radians(60)) * lengthSides;
     }
-    x3 = PApplet.parseInt(x1 + (0.5f*length_sides));
+    x3 = PApplet.parseInt(x1 + (0.5f*lengthSides));
     
-    x2 = x1 + length_sides;
+    x2 = x1 + lengthSides;
     y2 = y1;
     
     stroke(gradient, 255, 255);
@@ -165,18 +174,18 @@ class Triangle {
   }
   
   float get_h() {
-   float h = ((sqrt(3)) * (length_sides / 2));
+   float h = ((sqrt(3)) * (lengthSides / 2));
    return h;
   }
   
-  void draw_inside(float _x1, float _y1, float _x2, float _y2, float _x3, float _y3) {
+  void drawInside(float _x1, float _y1, float _x2, float _y2, float _x3, float _y3) {
     iterations = iterations + 1;
-    float _x4 = _x2 + (_x3 - _x2) * inside_distance;
-    float _y4 = _y2 + (_y3 - _y2) * inside_distance;
-    float _x5 = _x3 + (_x1 - _x3) * inside_distance;
-    float _y5 = _y3 + (_y1 - _y3) * inside_distance;
-    float _x6 = _x1 + (_x4 - _x1) * inside_distance;
-    float _y6 = _y1 + (_y4 - _y1) * inside_distance;
+    float _x4 = _x2 + (_x3 - _x2) * insideDistance;
+    float _y4 = _y2 + (_y3 - _y2) * insideDistance;
+    float _x5 = _x3 + (_x1 - _x3) * insideDistance;
+    float _y5 = _y3 + (_y1 - _y3) * insideDistance;
+    float _x6 = _x1 + (_x4 - _x1) * insideDistance;
+    float _y6 = _y1 + (_y4 - _y1) * insideDistance;
    
     stroke(gradient, 255, 255);
     line(int(_x1), int(_y1), int(_x4), int(_y4));
@@ -184,65 +193,72 @@ class Triangle {
     line(int(_x5), int(_y5), int(_x6), int(_y6));
     
     if (gradient >= 255) gradient=0; else gradient=iterations*10;
-    if (iterations < counter_iterations) {
-      draw_inside(_x4, _y4, _x5, _y5, _x6, _y6);
+    if (iterations < counterIterations) {
+      drawInside(_x4, _y4, _x5, _y5, _x6, _y6);
     }
   }
   
   /**
    * Fill an Image with Triangles
-   * 
-   * @param  
-   * @param
+   *
    * @return ArrayList
    */
+  ArrayList<Triangle> triangleFill() {
+
+    ArrayList<Triangle> triangles = new ArrayList<Triangle>();
+    int rows = 0;
+    int counter = 0;
+    int lastY;
+    int shift = int(-0.5 * triangleSize); // Triangles will start out of frame to fill the whole screen
+    boolean screenFilled = false;
+
+      while (!screenFilled) {
   
-  void triangleFill(int counter) {
-    
-  ArrayList<Triangle> triangles = new ArrayList<Triangle>();
-  
-  int shift = int(-0.5 * size_triangle); //triangles will start out of frame to fill the whole screen
-  int rows = 0;
-  int l_y;
-  
-  while (counter < 300) {
-    
-    triangles.add(new Triangle(length_sides, counter_iterations, inside_distance, "bottom"));
-    Triangle c_triangle = triangles.get(counter); //current triangle
-    
-    if (counter == 0) { // First Element in ArrayList
-      c_triangle.set_coordinates(shift, 0); //first triangle starts out of frame to fill the whole screen
-      c_triangle.draw();
-      rows = rows + 1;
-    } else { // Other Elements
-      Triangle l_triangle = triangles.get(counter - 1); //last triangle
-      float x_coordinate = l_triangle.get_x2();
-      String l_orientation = l_triangle.get_orientation();
-      if (x_coordinate > window_x) { // If x2 coordinate of current triangle exeeds boundaries start a new row of triangles.
-        rows = rows + 1;
-        if (isEven(rows)){
-            shift = - size_triangle;
+      triangles.add(new Triangle(lengthSides, counterIterations, insideDistance, "bottom"));
+      Triangle currentTriangle = triangles.get(counter);
+
+      if (counter == 0) {  // First Element in ArrayList
+        currentTriangle.setCoordinates(shift, 0); //first triangle starts out of frame to fill the whole screen
+        currentTriangle.draw();
+        rows++;
+      } else {             // Other Elements
+        Triangle lastTriangle = triangles.get(counter - 1);
+        float xCoordinate = lastTriangle.getX2();
+        String lastTriangleOrientation = lastTriangle.getOrientation();
+        if (xCoordinate > (width + lengthSides)) { // If x2 coordinate of current triangle exeeds boundaries start a new line of triangles.
+          rows = rows + 1;
+          if (isEven(rows)){
+            shift = - triangleSize;
           } else {
-            shift = int(-0.5 * size_triangle);
+            shift = int(-0.5 * triangleSize);
           }
-        if (l_orientation == "top") {
-          l_y = int(l_triangle.get_y3());
+          if (lastTriangleOrientation == "top") {
+            lastY = int(lastTriangle.getY3());
+          } else {
+            lastY = int(lastTriangle.getY1());
+          }
+          currentTriangle.setCoordinates(shift, int(lastY + (lastTriangle.get_h())));
+          currentTriangle.draw();
         } else {
-          l_y = int(l_triangle.get_y1());
+          if (lastTriangleOrientation == "bottom") {
+            currentTriangle.setOrientation("top");
+          }
+          currentTriangle.location(lastTriangle, "right");
+          currentTriangle.draw();
         }
-        c_triangle.set_coordinates(shift, int(l_y + (l_triangle.get_h()))); //next row start under last row and every even row is shifted by 1/2 size
-        c_triangle.draw();
-      } else { //continue current row
-        if (l_orientation == "bottom") {
-          c_triangle.set_orientation("top");
-        }
-        c_triangle.location(l_triangle, "right");
-        c_triangle.draw();
       }
+      if ((currentTriangle.getY1() - currentTriangle.get_h()) > height || (currentTriangle.getY3() - currentTriangle.get_h()) > height) {
+        screenFilled = true;
+      }
+      currentTriangle.setRow(rows);
+      counter++;
     }
-    counter++;
+    return triangles;
   }
-}
+  
+  boolean isEven(int n) {
+    return (n % 2) == 0;
+  }
 }
 
 //Ideen: set_edges Funktion einbauen um nicht-gleichseitige Dreiecke zu realisieren

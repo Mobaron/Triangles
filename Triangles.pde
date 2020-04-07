@@ -1,38 +1,37 @@
-/////////////////////////////////////////////////////////////
-int window_x = 2560;
+////////////////////////////////////////// Global Parameters
 int gradient = 255;
-int size_triangle = 200;
-int iteration_param = 200;
-float distance_param = 0.08f;
-/////////////////////////////////////////////////////////////
 
-ArrayList<Hexagon> hexagons = new ArrayList<Hexagon>();
+////////////////////////////////////////// Triangle Parameters
+int triangleSize = 200;
+int triangleInsideIterations = 200;
+float triangleInsideDistance = 0.08f;
+
+////////////////////////////////////////// Hexagon Parameters
+int hexagonInsideIterations = 200;
+float hexagonInsideDistance = 0.08f;
+
 
 public void setup() {
-  size(2560, 1440);
-  //noSmooth();
+  noSmooth();
+  fullScreen();
   background(0);
   colorMode(HSB);
+  noLoop();
 }
 
 public void draw() {
-  
-  //triangleFill();
-  //translate(250, 250);
-  //hexagons.add(new Hexagon());
-  //Hexagon c_hexagon = hexagons.get(counter); //current triangle
-  //c_hexagon.set_coordinates(2 * size_triangle, int(sin(radians(60)) * size_triangle)); 
-  //c_hexagon.set_size(2 * size_triangle);
-  //      c_hexagon.draw();
-  //Hexagon hexagon;
-  //hexagon = hexagons.get(0);
-  //hexagon.draw();
+
   ArrayList<Triangle> triangles = new ArrayList<Triangle>();
-  Triangle tri_init = new Triangle(size_triangle, iteration_param, distance_param, "bottom");
-  tri_init.triangleFill(100);
-}
-
-
-static final boolean isEven(int n) {
-  return (n % 2) == 0;
+  Triangle triInit = new Triangle(triangleSize, triangleInsideIterations, triangleInsideDistance, "bottom"); // Triangle used for fill method.
+  triangles = triInit.triangleFill();
+  
+  Hexagon hexagon1 = new Hexagon(triInit.getSize(), hexagonInsideIterations, hexagonInsideDistance);
+  Hexagon hexagon2 = new Hexagon(triInit.getSize(), hexagonInsideIterations, hexagonInsideDistance);
+  Hexagon hexagon3 = new Hexagon(triInit.getSize(), hexagonInsideIterations, hexagonInsideDistance);
+  hexagon1.setCoordiantesByTriangle(triangles.get(50));
+  hexagon2.setCoordiantesByTriangle(triangles.get(60));
+  hexagon3.setCoordiantesByTriangle(triangles.get(130));
+  hexagon1.draw();
+  hexagon2.draw();
+  hexagon3.draw();
 }

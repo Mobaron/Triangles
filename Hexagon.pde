@@ -1,29 +1,42 @@
 class Hexagon {
   
-  int x1= 0;
-  int y1= 0;
-  int size= size_triangle;
-  float distance= distance_param;
+  int x1 = 0;
+  int y1 = 0;
+  int size;
+  int iterations;
+  int counter = 0;
+  float distance;
+  
+  Hexagon(int size, int iterations, float distance){
+    this.size = size;
+    this.distance = distance;
+    this.iterations = iterations;
+  } 
   
   void draw() {
-    draw_black_hex();
-    draw_inside_hex(start_hex(), distance);
+    drawBlackHex();
+    drawInsideHex(startHex());
   }
   
-  void set_coordinates(int x, int y){
+  void setCoordiantesByTriangle(Triangle triangle) {
+    x1 = int(triangle.getX2());
+    y1 = int(triangle.getY2());
+  }
+  
+  void setCoordinates(int x, int y){
     this.x1 = x;
     this.y1 = y;
   }
   
-  void get_size(Triangle parent) {
-    this.size = parent.length_sides;
+  void getSize(Triangle parent) {
+    this.size = parent.lengthSides;
   }
   
-  void set_size(int size) {
+  void setSize(int size) {
     this.size = size;
   }
   
-  void draw_black_hex() {
+  void drawBlackHex() {
     float angle = TWO_PI / 6;
     float radius = size;
     float x = x1 + 0.5 * size;
@@ -36,10 +49,10 @@ class Hexagon {
       vertex(sx,sy);
     }
     endShape(CLOSE);
-    noFill();  
+    noFill();
   }
   
-  float[] start_hex() {
+  float[] startHex() {
     float edges[] = new float[12];
     edges[0] = x1;
     edges[1] = y1;
@@ -65,36 +78,33 @@ class Hexagon {
     return edges;
   }
   
+   void drawInsideHex(float edges[]){
+    float newEdges[] = new float[12];
+    newEdges[0] = edges[2] + (edges[4] - edges[2]) * distance;
+    newEdges[1] = edges[3] + (edges[5] - edges[3]) * distance;
+    newEdges[2] = edges[4] + (edges[6] - edges[4]) * distance;
+    newEdges[3] = edges[5] + (edges[7] - edges[5]) * distance;
+    newEdges[4] = edges[6] + (edges[8] - edges[6]) * distance;
+    newEdges[5] = edges[7] + (edges[9] - edges[7]) * distance;
+    newEdges[6] = edges[8] + (edges[10] - edges[8]) * distance;
+    newEdges[7] = edges[9] + (edges[11] - edges[9]) * distance;
+    newEdges[8] = edges[10] + (edges[0] - edges[10]) * distance;
+    newEdges[9] = edges[11] + (edges[1] - edges[11]) * distance;
+    newEdges[10] = edges[0] + (newEdges[0] - edges[0]) * distance;
+    newEdges[11] = edges[1] + (newEdges[1] - edges[1]) * distance;
 
-   void draw_inside_hex(float edges[], float distance){//, int counter) {
-    //iterations = iterations + 1;
-    float new_edges[] = new float[12];
-    new_edges[0] = edges[2] + (edges[4] - edges[2]) * distance;
-    new_edges[1] = edges[3] + (edges[5] - edges[3]) * distance;
-    new_edges[2] = edges[4] + (edges[6] - edges[4]) * distance;
-    new_edges[3] = edges[5] + (edges[7] - edges[5]) * distance;
-    new_edges[4] = edges[6] + (edges[8] - edges[6]) * distance;
-    new_edges[5] = edges[7] + (edges[9] - edges[7]) * distance;
-    new_edges[6] = edges[8] + (edges[10] - edges[8]) * distance;
-    new_edges[7] = edges[9] + (edges[11] - edges[9]) * distance;
-    new_edges[8] = edges[10] + (edges[0] - edges[10]) * distance;
-    new_edges[9] = edges[11] + (edges[1] - edges[11]) * distance;
-    new_edges[10] = edges[0] + (new_edges[0] - edges[0]) * distance;
-    new_edges[11] = edges[1] + (new_edges[1] - edges[1]) * distance;
-  
-    
     stroke(gradient, 255, 255);
-    line(edges[0], edges[1], new_edges[0], new_edges[1]);
-    line(new_edges[0], new_edges[1], new_edges[2], new_edges[3]);
-    line(new_edges[2], new_edges[3], new_edges[4], new_edges[5]);
-    line(new_edges[4], new_edges[5], new_edges[6], new_edges[7]);
-    line(new_edges[6], new_edges[7], new_edges[8], new_edges[9]);
-    line(new_edges[8], new_edges[9], new_edges[10], new_edges[11]);
+    line(edges[0], edges[1], newEdges[0], newEdges[1]);
+    line(newEdges[0], newEdges[1], newEdges[2], newEdges[3]);
+    line(newEdges[2], newEdges[3], newEdges[4], newEdges[5]);
+    line(newEdges[4], newEdges[5], newEdges[6], newEdges[7]);
+    line(newEdges[6], newEdges[7], newEdges[8], newEdges[9]);
+    line(newEdges[8], newEdges[9], newEdges[10], newEdges[11]);
     
-    
-    //if (gradient >= 255) gradient=0; else gradient=iterations*2;
-    //if (iterations < counter) {
-    //  draw_inside_hex(new_edges, distance_param, counter);
-    //}
+    this.counter++;
+    if (gradient >= 255) gradient=0; else gradient=iterations*10;
+    if (this.counter < this.iterations) {
+      drawInsideHex(newEdges);
+    }
   } 
 }

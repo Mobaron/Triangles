@@ -1,8 +1,8 @@
 class Rhombus {
   int x1= 0;
   int y1= 0;
-  int size= size_triangle;
-  float distance= distance_param;
+  int size= triangleSize;
+  float distance= triangleInsideDistance;
   
   void draw() {
     draw_black_rhom();
@@ -15,7 +15,7 @@ class Rhombus {
   }
   
   void get_size(Triangle parent) {
-    this.size = parent.length_sides;
+    this.size = parent.lengthSides;
   }
   
   void set_size(int size) {
