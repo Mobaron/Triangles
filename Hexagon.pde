@@ -18,7 +18,7 @@ class Hexagon {
     drawInsideHex(startHex());
   }
   
-  void setCoordiantesByTriangle(Triangle triangle) {
+  void setCoordinatesByTriangle(Triangle triangle) {
     x1 = int(triangle.getX2());
     y1 = int(triangle.getY2());
   }
@@ -37,17 +37,17 @@ class Hexagon {
   }
   
   void drawBlackHex() {
-    float angle = TWO_PI / 6;
-    float radius = size;
-    float x = x1 + 0.5 * size;
-    float y = y1 + sin(radians(60)) * size;
-    fill(0);
+    
+    float edges[] = startHex();
+    fill(backgroundColor);
     beginShape();
-    for (float a = 0; a < TWO_PI; a += angle){
-      float sx = x + cos(a) * radius;
-      float sy = y + sin(a) * radius;
-      vertex(sx,sy);
-    }
+    vertex(edges[0], edges[1]);
+    vertex(edges[2], edges[3]);
+    vertex(edges[4], edges[5]);
+    vertex(edges[6], edges[7]);
+    vertex(edges[8], edges[9]);
+    vertex(edges[10], edges[11]);
+
     endShape(CLOSE);
     noFill();
   }
