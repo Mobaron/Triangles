@@ -5,10 +5,9 @@ class Rhombus {
   float distance= triangleInsideDistance;
   int rhomInsideIterations= triangleInsideIterations;
   int counter = 0;
-  int iterations;
   
   void draw() {
-    drawBlackRhom();
+    drawFilledRhom();
     drawInsideRhom(startRhom());
   }
   
@@ -30,7 +29,7 @@ class Rhombus {
     this.size = size;
   }
   
-  void drawBlackRhom() { 
+  void drawFilledRhom() { 
     float edges[] = startRhom();
     fill(backgroundColor);
     beginShape();
@@ -74,13 +73,10 @@ class Rhombus {
     line(newEdges[0], newEdges[1], newEdges[2], newEdges[3]);
     line(newEdges[2], newEdges[3], newEdges[4], newEdges[5]);
     line(newEdges[4], newEdges[5], newEdges[6], newEdges[7]);
-    line(newEdges[6], newEdges[7], newEdges[8], newEdges[9]);
-    line(newEdges[8], newEdges[9], newEdges[10], newEdges[11]);
 
     
-    //if (gradient >= 255) gradient=0; else gradient = iterations * 2;
     this.counter++;
-    if (gradient >= 255) gradient=0; else gradient=iterations*10;
+    if (gradient >= 255) gradient=0; else gradient=counter*2;
     if (this.counter < this.rhomInsideIterations) {
       drawInsideRhom(newEdges);
     }

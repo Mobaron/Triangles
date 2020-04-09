@@ -15,9 +15,9 @@ class Triangle {
 
   /**
    * Triangle Constructor.
-   * @param length_sides         Length of the triangle sides.
-   * @param counter_iterations   Counter of how many inside lines will be drawn.
-   * @param inside_distance      Distance between inside lines.
+   * @param lengthSides         Length of the triangle sides.
+   * @param counterIterations   Counter of how many inside lines will be drawn.
+   * @param insideDistance      Distance between inside lines.
    */
   Triangle(int lengthSides, int counterIterations, float insideDistance, String rotation) {
     // rotation accepted parameters: top, left, right, bottom;

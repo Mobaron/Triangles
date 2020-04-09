@@ -14,7 +14,7 @@ class Hexagon {
   } 
   
   void draw() {
-    drawBlackHex();
+    drawFilledHex();
     drawInsideHex(startHex());
   }
   
@@ -36,7 +36,7 @@ class Hexagon {
     this.size = size;
   }
   
-  void drawBlackHex() {
+  void drawFilledHex() {
     
     float edges[] = startHex();
     fill(backgroundColor);
@@ -102,7 +102,7 @@ class Hexagon {
     line(newEdges[8], newEdges[9], newEdges[10], newEdges[11]);
     
     this.counter++;
-    if (gradient >= 255) gradient=0; else gradient=iterations*10;
+    if (gradient >= 255) gradient=0; else gradient=counter*5;
     if (this.counter < this.iterations) {
       drawInsideHex(newEdges);
     }

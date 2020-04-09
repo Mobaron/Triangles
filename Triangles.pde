@@ -37,6 +37,18 @@ public void draw() {
   hexagon3.draw();
   
   Rhombus rhombus1 = new Rhombus();
-  rhombus1.setCoordinatesByTriangle(triangles.get(1));
+  Rhombus rhombus2 = new Rhombus();
+  Rhombus rhombus3 = new Rhombus();
+  Rhombus rhombus4 = new Rhombus();
+  Rhombus rhombus5 = new Rhombus();
+  rhombus1.setCoordinatesByTriangle(triangles.get(0));
+  rhombus2.setCoordinatesByTriangle(triangles.get(1));
+  rhombus3.setCoordinatesByTriangle(triangles.get(2));
+  rhombus4.setCoordinatesByTriangle(triangles.get(3));
+  rhombus5.setCoordinatesByTriangle(triangles.get(4));
   rhombus1.draw();
+  rhombus2.draw();
+  rhombus3.draw();
+  rhombus4.draw();
+  rhombus5.draw();
 }
