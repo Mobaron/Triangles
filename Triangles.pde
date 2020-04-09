@@ -46,6 +46,9 @@ public void draw() {
   rhombus3.setCoordinatesByTriangle(triangles.get(2));
   rhombus4.setCoordinatesByTriangle(triangles.get(3));
   rhombus5.setCoordinatesByTriangle(triangles.get(4));
+  rhombus1.setMirror(true);
+  rhombus3.setMirror(true);
+  rhombus5.setMirror(true);
   rhombus1.draw();
   rhombus2.draw();
   rhombus3.draw();

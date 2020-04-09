@@ -5,10 +5,15 @@ class Rhombus {
   float distance= triangleInsideDistance;
   int rhomInsideIterations= triangleInsideIterations;
   int counter = 0;
+  boolean mirror = false;
   
   void draw() {
     drawFilledRhom();
-    drawInsideRhom(startRhom());
+    if (mirror == false){
+      drawInsideRhom(startRhom());
+    } else {
+      drawInsideRhomMirrored(startRhom());
+    }
   }
   
   void setCoordinates(int x, int y){
@@ -19,6 +24,10 @@ class Rhombus {
   void setCoordinatesByTriangle(Triangle triangle) {
     this.x1 = int(triangle.getX2());
     this.y1 = int(triangle.getY2());
+  }
+  
+  void setMirror(boolean mirror){
+    this.mirror = mirror;
   }
   
   void getSize(Triangle parent) {
@@ -79,6 +88,34 @@ class Rhombus {
     if (gradient >= 255) gradient=0; else gradient=counter*2;
     if (this.counter < this.rhomInsideIterations) {
       drawInsideRhom(newEdges);
+    }
+  } 
+  
+  void drawInsideRhomMirrored(float edges[]) {
+    float newEdges[] = new float[12];
+    newEdges[0] = edges[6] + (edges[4] - edges[6]) * distance;
+    newEdges[1] = edges[7] + (edges[5] - edges[7]) * distance;
+    newEdges[6] = edges[4] + (edges[2] - edges[4]) * distance;
+    newEdges[7] = edges[5] + (edges[3] - edges[5]) * distance;
+    newEdges[4] = edges[2] + (edges[0] - edges[2]) * distance;
+    newEdges[5] = edges[3] + (edges[1] - edges[3]) * distance;
+    newEdges[2] = edges[0] + (newEdges[0] - edges[0]) * distance;
+    newEdges[3] = edges[1] + (newEdges[1] - edges[1]) * distance;
+
+
+  
+    
+    stroke(gradient, 255, 255);
+    line(edges[0], edges[1], newEdges[0], newEdges[1]);
+    line(newEdges[0], newEdges[1], newEdges[6], newEdges[7]);
+    line(newEdges[6], newEdges[7], newEdges[4], newEdges[5]);
+    line(newEdges[4], newEdges[5], newEdges[2], newEdges[3]);
+
+    
+    this.counter++;
+    if (gradient >= 255) gradient=0; else gradient=counter*2;
+    if (this.counter < this.rhomInsideIterations) {
+      drawInsideRhomMirrored(newEdges);
     }
   } 
 }
