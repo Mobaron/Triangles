@@ -11,17 +11,29 @@ float triangleInsideDistance = 0.08f;
 int hexagonInsideIterations = 200;
 float hexagonInsideDistance = 0.08f;
 
+////////////////////////////////////////// Variables
+ArrayList<Triangle> triangles = new ArrayList<Triangle>();
+Triangle objTriangle = new Triangle();
+UI ui = new UI();
+Slider slider = new Slider();
+
 
 public void setup() {
   noSmooth();
   fullScreen();
   background(backgroundColor);
   colorMode(HSB);
-  noLoop();
+  run();
 }
 
 public void draw() {
+  slider.activate();
+}
 
+<<<<<<< HEAD
+void run(){
+  slider.draw();
+=======
   ArrayList<Triangle> triangles = new ArrayList<Triangle>();
   Triangle triInit = new Triangle(triangleSize, triangleInsideIterations, triangleInsideDistance, "bottom"); // Triangle used for fill method.
   triangles = triInit.triangleFill();
@@ -54,4 +66,5 @@ public void draw() {
   rhombus3.draw();
   rhombus4.draw();
   rhombus5.draw();
+>>>>>>> 763ee51030eb485e3f8a2c9cef9b81f535119e09
 }

@@ -1,17 +1,19 @@
 class Triangle {
 
-    float x1;
-    float y1;
+    float x1 = 0;
+    float y1 = 0;
     float x2;
     float y2;
     float x3;
     float y3;
-    float insideDistance;
+    float insideDistance = 0.05f; // Default values may be changed using second constructor.
     int row;
-    int lengthSides;
-    int counterIterations;
+    int lengthSides = 500;
+    int counterIterations = 100;
     int iterations = 0;
-    String orientation;
+    String orientation = "bottom";
+    
+  Triangle(){}
 
   /**
    * Triangle Constructor.
@@ -21,8 +23,6 @@ class Triangle {
    */
   Triangle(int lengthSides, int counterIterations, float insideDistance, String rotation) {
     // rotation accepted parameters: top, left, right, bottom;
-    this.x1 = 0;
-    this.y1 = 0;
     this.lengthSides = lengthSides;
     this.orientation = rotation;
     this.insideDistance = insideDistance;
@@ -50,7 +50,7 @@ class Triangle {
           this.y1 = parent.getY1();
         } else if (position == "bottom"){
           this.x1 = parent.getX1();
-          this.y1 = parent.getY1() + parent.get_h() * 2;
+          this.y1 = parent.getY1() + parent.getH() * 2;
         }
       }
     }
@@ -65,10 +65,10 @@ class Triangle {
           this.y1 = parent.getY1();
         } else if (position == "top"){
           this.x1 = parent.getX1();
-          this.y1 = parent.getY1() - parent.get_h();
+          this.y1 = parent.getY1() - parent.getH();
         } else if (position == "bottom"){
           this.x1 = parent.getX1();
-          this.y1 = parent.getY1() + parent.get_h();
+          this.y1 = parent.getY1() + parent.getH();
         }
       }
     }
@@ -83,7 +83,7 @@ class Triangle {
           this.y1 = parent.getY3();
         } else if (position == "top"){
           this.x1 = parent.getX1();
-          this.y1 = parent.getY1() - parent.get_h() * 2;
+          this.y1 = parent.getY1() - parent.getH() * 2;
         } else if (position == "bottom"){
           this.x1 = parent.getX1();
           this.y1 = parent.getY1();
@@ -101,10 +101,10 @@ class Triangle {
           this.y1 = parent.getY1();
         } else if (position == "top"){
           this.x1 = parent.getX1();
-          this.y1 = parent.getY1() - parent.get_h();
+          this.y1 = parent.getY1() - parent.getH();
         } else if (position == "bottom"){
           this.x1 = parent.getX1();
-          this.y1 = parent.getY1() + parent.get_h();
+          this.y1 = parent.getY1() + parent.getH();
         }
       }
     }
@@ -173,7 +173,7 @@ class Triangle {
     line(x3, y3, x1, y1);
   }
   
-  float get_h() {
+  float getH() {
    float h = ((sqrt(3)) * (lengthSides / 2));
    return h;
   }
@@ -237,7 +237,7 @@ class Triangle {
           } else {
             lastY = int(lastTriangle.getY1());
           }
-          currentTriangle.setCoordinates(shift, int(lastY + (lastTriangle.get_h())));
+          currentTriangle.setCoordinates(shift, int(lastY + (lastTriangle.getH())));
           currentTriangle.draw();
         } else {
           if (lastTriangleOrientation == "bottom") {
@@ -247,7 +247,7 @@ class Triangle {
           currentTriangle.draw();
         }
       }
-      if ((currentTriangle.getY1() - currentTriangle.get_h()) > height || (currentTriangle.getY3() - currentTriangle.get_h()) > height) {
+      if ((currentTriangle.getY1() - currentTriangle.getH()) > height || (currentTriangle.getY3() - currentTriangle.getH()) > height) {
         screenFilled = true;
       }
       currentTriangle.setRow(rows);
