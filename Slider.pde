@@ -18,12 +18,10 @@ class Slider {
   ArrayList<Integer> rectAreaY = new ArrayList<Integer>();
   
   Slider(){}
-  
-  void activate() {
+
+  void update() {
     if (rectAreaX.contains(mouseX) && rectAreaY.contains(mouseY)){
       drawKnob(mouseX, yCoordinateKnob);
-      
-      System.out.println("Inside");
     }
   }
 
@@ -51,11 +49,10 @@ class Slider {
   
   void createRectArray() {
     for (int i = 0; i < sizeSliderY; i++) {
-      for (int o = 0; o < sizeSliderX; o++) {
+      for (int o = 0; o < sizeSliderX - 20; o++) {
         rectAreaX.add(o + xCoordinateSlider);
         rectAreaY.add(i + yCoordinateSlider);
       }
     }
-    print("Done!");
   }
 }
