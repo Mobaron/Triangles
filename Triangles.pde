@@ -11,7 +11,7 @@ float triangleInsideDistance = 0.08f;
 int hexagonInsideIterations = 200;
 float hexagonInsideDistance = 0.08f;
 
-////////////////////////////////////////// Variables
+//////////////////////////////////////////
 ArrayList<Triangle> triangles = new ArrayList<Triangle>();
 Triangle objTriangle = new Triangle();
 UI ui = new UI();
